@@ -12,6 +12,10 @@ denoを使用しています
 ## ドキュメント
 demo.ts をご覧ください。
 
+構成的に、`MangaListInterface`や`MangaInterface`に情報が蓄積される形なので、
+一度取得した情報はキャッシュされるような形にしています。
+
+キャッシュを更新する場合は Provider classを再度newしてください。
 
 ```bash
 deno run --allow-env --allow-net demo.ts
