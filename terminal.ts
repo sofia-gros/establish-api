@@ -91,21 +91,21 @@ async function Terminal() {
       break;
   }
 
-  const _ = await Select.prompt({
-    message: "操作を選択してください",
-    options: [
-      { name: "次のチャプター", value: "next_chapter" },
-      { name: "終了", value: "exit" },
-    ],
-  });
+  // const _ = await Select.prompt({
+  //   message: "操作を選択してください",
+  //   options: [
+  //     { name: "次のチャプター", value: "next_chapter" },
+  //     { name: "終了", value: "exit" },
+  //   ],
+  // });
 
-  switch (_) {
-    case "next_chapter":
-      await GUI(provider, manga_info, action_manga_chapter + 1);
-      break;
-    case "exit":
-      return;
-  }
+  // switch (_) {
+  //   case "next_chapter":
+  //     await GUI(provider, manga_info, action_manga_chapter + 1);
+  //     break;
+  //   case "exit":
+  //     return;
+  // }
   
 }
 
