@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "@panha/scrape": "jsr:@panha/scrape@^2.1.2"
+  },
+  "scripts": {
+    "start": "deno run --allow-read --allow-write --allow-env --allow-net scrape.ts"
+  }
+}
