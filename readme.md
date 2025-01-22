@@ -19,4 +19,5 @@ demo.ts をご覧ください。
 
 ```bash
 deno run --allow-env --allow-net demo.ts
+deno run --allow-env --allow-net --allow-ffi --allow-read --allow-write --allow-run terminal.ts
 ```
