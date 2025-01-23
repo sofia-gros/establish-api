@@ -1,6 +1,6 @@
-import { DOMParser, Element } from "jsr:@b-fuze/deno-dom";
+import { DOMParser, Element } from "@b-fuze/deno-dom";
 
-import { scrape } from "@panha/scrape/";
+import { scrape } from "@panha/scrape";
 
 export interface ProviderInterface {
   name: string;
@@ -26,9 +26,14 @@ export interface MangaListInterface {
   search: MangaInterface[]
 }
 
+export interface QueryInterface {
+  [key: string]: string
+}
+
+
 export class Provider {
   provider: ProviderInterface;
-  manga_list: MangaListInterface = { hot: [] };
+  manga_list: MangaListInterface = { hot: [], search: [] };
   
   constructor(name: string, provider: ProviderInterface) {
     this.provider = provider;
@@ -39,17 +44,18 @@ export class Provider {
     return this.manga_list;
   }
 
-  async _scrape(url: string) {
+  async _scrape(url: string): Promise<any> {
     return await scrape(`${this.provider.base_url}${url}`);
   }
-  async _paser(html: string) {
+  async _paser(html: string) : Promise<any> {
     return new DOMParser().parseFromString(html, "text/html");
   }
 
-  _query(param: object): string {
+  _query(param: QueryInterface): string {
     let param_text = "?";
     for(const key in param) {
-      param_text += `${key}=${param[key]}`;
+      const value: string = param[key] || "";
+      param_text += `${key}=${value}`;
     }
     return param_text;
   }

@@ -1,8 +1,13 @@
 {
+  "name": "@sofiagros/establish-api",
+  "version": "0.1.0",
+  "license": "MIT",
+  "exports": "./index.ts",
   "imports": {
+    "@b-fuze/deno-dom": "jsr:@b-fuze/deno-dom@^0.1.49",
     "@panha/scrape": "jsr:@panha/scrape@^2.1.2"
   },
   "scripts": {
-    "start": "deno run --allow-read --allow-write --allow-env --allow-net scrape.ts"
+    "start": "deno run --allow-read --allow-write --allow-env --allow-net index.ts"
   }
 }

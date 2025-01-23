@@ -65,7 +65,7 @@ export class Mangajikan extends Provider {
       manga.tags.push(dom_tag.textContent);
     }
     // 年代
-    manga.year = dom.querySelector(this.provider.scrapes.info.year)?.textContent ? parseInt(dom.querySelector(this.provider.scrapes.info.year)?.textContent?.replace(/[^0-9]/g, "")) : null;
+    manga.year = dom.querySelector(this.provider.scrapes.info.year)?.textContent ? parseInt(dom.querySelector(this.provider.scrapes.info.year)?.textContent?.replace(/[^0-9]/g, "") || "") : null;
     // 説明
     manga.description = dom.querySelector(this.provider.scrapes.info.description)?.textContent || null;
     const chapter_list = dom.querySelectorAll(this.provider.scrapes.info.chapter_list);
@@ -75,8 +75,8 @@ export class Mangajikan extends Provider {
       for (const chapters of chapter_list) {
         const chapter = chapters.querySelector("a");
         manga.chapters_url.push({
-          url: chapter.getAttribute("href") || "",
-          number: parseInt(chapter.textContent?.replace(/[^0-9]/g, "")) || 0
+          url: chapter?.getAttribute("href") || "",
+          number: parseInt(chapter?.textContent?.replace(/[^0-9]/g, "") || "") || 0
         });
       }
     }
