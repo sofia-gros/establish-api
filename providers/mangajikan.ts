@@ -90,7 +90,6 @@ export class Mangajikan extends Provider {
    * @description 漫画の検索
    */
   async search(keyword: string): Promise<MangaInterface[]> {
-    console.log(this.provider.search_url + this._query({ key: keyword }));
     const _scrape = await this._scrape(this.provider.search_url + this._query({ key: keyword }));
     const _scrape_html = await _scrape.html(".vod-list > ul.row")[0];
     const dom = await this._paser(_scrape_html);

@@ -9,6 +9,7 @@
     "jsr:@denosaurs/plug@1.0.3": "1.0.3",
     "jsr:@panha/scrape@*": "2.1.2",
     "jsr:@panha/scrape@^2.1.2": "2.1.2",
+    "jsr:@sofiagros/establish-api@0.1": "0.1.0",
     "jsr:@std/assert@0.223": "0.223.0",
     "jsr:@std/assert@~0.213.1": "0.213.1",
     "jsr:@std/async@0.223.0": "0.223.0",
@@ -59,6 +60,13 @@
       "dependencies": [
         "jsr:@astral/astral",
         "jsr:@b-fuze/deno-dom@~0.1.48"
+      ]
+    },
+    "@sofiagros/establish-api@0.1.0": {
+      "integrity": "5506870775a4fc28c1206aaa9b39f14e7288e21e330d8cd1e8ecb33f29270245",
+      "dependencies": [
+        "jsr:@b-fuze/deno-dom@~0.1.49",
+        "jsr:@panha/scrape@^2.1.2"
       ]
     },
     "@std/assert@0.213.1": {
@@ -159,7 +167,8 @@
   "workspace": {
     "dependencies": [
       "jsr:@b-fuze/deno-dom@~0.1.49",
-      "jsr:@panha/scrape@^2.1.2"
+      "jsr:@panha/scrape@^2.1.2",
+      "jsr:@sofiagros/establish-api@0.1"
     ]
   }
 }
