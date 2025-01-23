@@ -33,6 +33,7 @@ async function Terminal() {
     message: "どこから探しますか？",
     options: [
       { name: "今話題の漫画", value: "hot" },
+      { name: "検索", value: "search" },
       { name: "終了", value: "exit" },
     ],
   });
@@ -41,6 +42,10 @@ async function Terminal() {
   switch (action) {
     case "hot":
       manga_list = await provider.getHot();
+      break;
+    case "search":
+      const keyword = await Input.prompt("検索ワードを入力してください");
+      manga_list = await provider.search(keyword);
       break;
     case "exit":
       return;

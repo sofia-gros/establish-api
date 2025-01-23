@@ -6,6 +6,7 @@ export interface ProviderInterface {
   name: string;
   base_url: string;
   hot_url: string;
+  search_url: string;
   scrapes: any;
 }
 
@@ -22,6 +23,7 @@ export interface MangaInterface {
 
 export interface MangaListInterface {
   hot: MangaInterface[];
+  search: MangaInterface[]
 }
 
 export class Provider {
@@ -37,10 +39,18 @@ export class Provider {
     return this.manga_list;
   }
 
-  async _scrape(url?: string) {
+  async _scrape(url: string) {
     return await scrape(`${this.provider.base_url}${url}`);
   }
-  async _paser(html) {
+  async _paser(html: string) {
     return new DOMParser().parseFromString(html, "text/html");
+  }
+
+  _query(param: object): string {
+    let param_text = "?";
+    for(const key in param) {
+      param_text += `${key}=${param[key]}`;
+    }
+    return param_text;
   }
 }

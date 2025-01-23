@@ -4,6 +4,7 @@ const provider: ProviderInterface = {
   name: "mangajikan",
   base_url: "https://mangajikan.com",
   hot_url: "/custom/top",
+  search_url: "/search",
   scrapes: {
     hot: {
       url: "/custom/top",
@@ -14,10 +15,12 @@ const provider: ProviderInterface = {
       next_url: "a.text-overflow",
     },
     info: {
+      chapter_list: ".episode-box .ewave-playlist-item",
       tags: "span.col-xs-12:nth-child(2) > a",
       year: ".col-xs-6.col-md-4.text-overflow",
       description: "div.vod-list:nth-child(2) > div:nth-child(2) > p:nth-child(1)",
-    }
+    },
+    getimg: ".more-box > .img img"
   }
 }
 
@@ -56,20 +59,16 @@ export class Mangajikan extends Provider {
     const _scrape = await this._scrape(manga.url);
     const _scrape_html = await _scrape.html("body")[0];
     const dom = await this._paser(_scrape_html);
-
     // タグリスト
     const dom_tags = dom.querySelectorAll(this.provider.scrapes.info.tags);
     for (const dom_tag of dom_tags) {
       manga.tags.push(dom_tag.textContent);
     }
-
     // 年代
     manga.year = dom.querySelector(this.provider.scrapes.info.year)?.textContent ? parseInt(dom.querySelector(this.provider.scrapes.info.year)?.textContent?.replace(/[^0-9]/g, "")) : null;
-
     // 説明
     manga.description = dom.querySelector(this.provider.scrapes.info.description)?.textContent || null;
-
-    const chapter_list = dom.querySelectorAll(".episode-box .ewave-playlist-item");
+    const chapter_list = dom.querySelectorAll(this.provider.scrapes.info.chapter_list);
     if (chapter_list.length) {
       manga.chapters_count = chapter_list.length;
       manga.chapters_url = [];
@@ -81,8 +80,32 @@ export class Mangajikan extends Provider {
         });
       }
     }
-    
     return manga;
+  }
+
+  /**
+   * 
+   * @param keyword: string
+   * @return Promise<MangaInterface[]>
+   * @description 漫画の検索
+   */
+  async search(keyword: string): Promise<MangaInterface[]> {
+    console.log(this.provider.search_url + this._query({ key: keyword }));
+    const _scrape = await this._scrape(this.provider.search_url + this._query({ key: keyword }));
+    const _scrape_html = await _scrape.html(".vod-list > ul.row")[0];
+    const dom = await this._paser(_scrape_html);
+    
+    this.manga_list.search = [];
+
+    const manga_list = dom.querySelectorAll("li");
+
+    for(const manga of manga_list) {
+      const title = manga.querySelector(".name a")?.textContent || "";
+      const image = manga.querySelector(".pic .img-wrapper")?.getAttribute("data-original") || "";
+      const url = manga.querySelector(".pic a")?.getAttribute("href") || "";
+      this.manga_list.search.push({title, image, url, tags: [], year: 0, description: null, chapters_count: null, chapters_url: []});
+    }
+    return this.manga_list.search;
   }
 
   /**
@@ -95,7 +118,7 @@ export class Mangajikan extends Provider {
     const _scrape = await this._scrape(chapter_url);
     const _scrape_html = await _scrape.html("body")[0];
     const dom = await this._paser(_scrape_html);
-    const dom_images = dom.querySelectorAll(".more-box > .img img");
+    const dom_images = dom.querySelectorAll(this.provider.scrapes.getimg);
     const images: string[] = [];
     for (const dom_image of dom_images) {
       images.push(dom_image.getAttribute("src") || "");
