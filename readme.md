@@ -38,7 +38,7 @@ console.log(await mangajikan.getImage(tensura.chapters_url[0].url));
 ```
 
 構成的に、`MangaListInterface`や`MangaInterface`に情報が蓄積される形なので、
-一度取得した情報はキャッシュされるような形にしています。
+一度取得した情報はキャッシュされています。
 
 キャッシュを更新する場合は Provider classを再度newしてください。
 
@@ -46,5 +46,4 @@ console.log(await mangajikan.getImage(tensura.chapters_url[0].url));
 
 ```bash
 deno run --allow-env --allow-net demo.ts
-deno run --allow-env --allow-net --allow-ffi --allow-read --allow-write --allow-run terminal.ts
 ```
