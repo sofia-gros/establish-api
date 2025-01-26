@@ -24,6 +24,10 @@ const provider: ProviderInterface = {
   }
 }
 
+/**
+ * @class Mangajikan
+ * @description Mangajikanクラス
+ */
 export class Mangajikan extends Provider {
   constructor() {
     super("mangajikan", provider);

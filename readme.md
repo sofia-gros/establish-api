@@ -46,4 +46,5 @@ console.log(await mangajikan.getImage(tensura.chapters_url[0].url));
 
 ```bash
 deno run --allow-env --allow-net demo.ts
+deno run --allow-env --allow-net --allow-ffi --allow-read --allow-write --allow-run terminal.ts
 ```
