@@ -20,7 +20,7 @@ const provider: ProviderInterface = {
       year: ".col-xs-6.col-md-4.text-overflow",
       description: "div.vod-list:nth-child(2) > div:nth-child(2) > p:nth-child(1)",
     },
-    getimg: ".more-box > .img img"
+    getimg: ".more-box .img img"
   }
 }
 
