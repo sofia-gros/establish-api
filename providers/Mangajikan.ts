@@ -2,7 +2,7 @@ import { MangaInterface, MangaListInterface, Provider, ProviderInterface } from 
 
 const provider: ProviderInterface = {
   name: "mangajikan",
-  base_url: "https://mangajikan.cc",
+  base_url: "https://www.mangajikan.cc/",
   hot_url: "/custom/top",
   search_url: "/search",
   scrapes: {
